@@ -20,15 +20,10 @@ public class OrderItem {
     private Long productId;
 
     @Column(name = "ORDER_ID")
-    private Long itemId;
+    private Long orderId;
 
     private int orderPrice;
     private int orderCount;
-
-
-
-
-
 
 
 }

@@ -17,6 +17,9 @@ public class Order {
     @Column(name = "ORDER_ID")
     private Long id;
 
+    @Column(name = "USER_ID")
+    private String userId;
+
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime orderDate;
 
