@@ -1,6 +1,5 @@
 package me.lms.jpatest.advancemodel;
 
-
 import jakarta.persistence.*;
 
 @Entity

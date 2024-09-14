@@ -5,26 +5,33 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "ORDERS")
-@Getter
-@Setter
+@Table(name = "ORDERS") @Getter @Setter
 public class Order {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ORDER_ID")
-    private Long id;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ORDER_ID")                              private Long id;
+    @ManyToOne @JoinColumn(name = "USER_ID")                private User user; // 주문유저
+    @OneToMany(mappedBy = "order")                          private List<OrderItem> orderItems= new ArrayList<OrderItem>();
+    @Temporal(TemporalType.TIMESTAMP)                       private LocalDateTime orderDate;
+    @Enumerated(EnumType.STRING)                            private OrderStatus status;
 
-    @Column(name = "USER_ID")
-    private String userId;
+    public void setMember(User user) {
+        if(this.user != null) {
+            this.user.getOrders().remove(this);
+        }
+        this.user = user;
+        user.getOrders().add(this);
+    }
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime orderDate;
 
-    @Enumerated(EnumType.STRING)
-    private String status;
+    public void addOrderItem(OrderItem orderItem) {
+        orderItems.add(orderItem);
+        orderItem.setOrder(this);
+    }
 
 
 }
