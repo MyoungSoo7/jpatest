@@ -3,7 +3,6 @@ package me.lms.jpatest.datamodel;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +15,9 @@ public class Order {
     @Column(name = "ORDER_ID")                              private Long id;
     @ManyToOne @JoinColumn(name = "USER_ID")                private User user; // 주문유저
     @OneToMany(mappedBy = "order")                          private List<OrderItem> orderItems= new ArrayList<OrderItem>();
+    @ManyToOne
+    private Delivery delivery;
+
     @Temporal(TemporalType.TIMESTAMP)                       private LocalDateTime orderDate;
     @Enumerated(EnumType.STRING)                            private OrderStatus status;
 
