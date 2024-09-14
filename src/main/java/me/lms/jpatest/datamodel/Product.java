@@ -15,15 +15,7 @@ public class Product {
     @Column(name = "PRODUCT_ID")
     private Long id;
 
-    @Column
-    private String name;
-
-    @Column
-    private int price;
-
-    @Column
-    private int stockQuantity;
-
-
-
+    @Column private String name;
+    @Column private int price;
+    @Column private int stockQuantity;
 }
